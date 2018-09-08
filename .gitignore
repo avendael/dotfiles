@@ -1,0 +1,4 @@
+zsh/history
+**/secret*
+nvim/autoload/
+nvim/.netrwhist

@@ -1,0 +1,78 @@
+# History
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_SAVE_NO_DUPS
+setopt INC_APPEND_HISTORY
+setopt HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_SPACE
+
+# fasd
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(fasd --init auto)"
+
+# Load plugins
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+MNML_USER_CHAR='₿'
+
+zplug "mafredri/zsh-async", from:github
+zplug "subnixr/minimal", use:minimal.zsh, from:github, as:theme
+zplug "unixorn/warhol.plugin.zsh"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+zplug load
+
+# keybindings
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# fzf
+export FZF_TMUX=1
+export FZF_DEFAULT_OPTS='--reverse --inline-info --ansi --color=light'
+export FZF_DEFAULT_COMMAND='ag -g "" --hidden'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# nvm
+export NVM_LAZY_LOAD=true
+export NVM_NO_USE=true
+export NVM_AUTO_USE=true
+
+# aliases
+alias vim="nvim"
+alias vimdiff=nvim -d
+alias g=git
+
+# man
+man() {
+    env \
+        LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+        LESS_TERMCAP_md=$(printf "\e[1;31m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[0m") \
+        LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+        LESS_TERMCAP_ue=$(printf "\e[0m") \
+        LESS_TERMCAP_us=$(printf "\e[1;32m") \
+            man "$@"
+}
+
+# iterm2
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# path
+export HOMEBREW_PREFIX="/usr/local"
+export MINICONDA_HOME="${HOMEBREW_PREFIX}/miniconda3"
+export PYTHON_HOME="${HOME}/Library/Python/2.7"
+export PATH="/usr/local/sbin:$PATH:${MINICONDA_HOME}/bin:${PYTHON_HOME}/bin"
+
+# secrets
+source "${ZDOTDIR}/secrets.sh"

@@ -1,0 +1,9 @@
+export DISABLE_AUTO_TITLE="true"
+export CLICOLOR=1
+export HISTFILE=$HOME/.config/zsh/history
+export HISTSIZE=10000
+export SAVEHIST=10000
+export ZDOTDIR=$HOME/.config/zsh
+
+export XDG_CONFIG_HOME=$HOME/.config
+export TMUXP_CONFIGDIR="${XDG_CONFIG_HOME}/tmuxp"

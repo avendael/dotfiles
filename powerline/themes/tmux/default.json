@@ -1,0 +1,14 @@
+{
+	"segments": {
+		"right": [
+			{
+				"function": "powerline.segments.common.sys.system_load",
+                "draw_hard_divider": false,
+				"priority": 50
+			},
+			{
+				"function": "powerline.segments.common.net.hostname"
+			}
+		]
+	}
+}

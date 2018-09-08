@@ -1,0 +1,39 @@
+[color]
+	ui = auto
+
+[core]
+	excludesfile = ~/.config/git/ignore
+	autocrlf = input
+
+[push]
+	default = simple
+
+[credential]
+	helper = osxkeychain
+
+[alias]
+	br = branch
+	ci = commit -S
+	co = checkout
+	ft = fetch
+	mg = merge
+	mt = mergetool
+	ol = log --oneline
+	pu = push
+	rb = rebase
+	rs = reset
+	st = status
+
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+
+[mergetool]
+	path = nvim
+
+[commit]
+	gpgsign = true
+
+[gpg]
+	program = gpg
