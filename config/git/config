@@ -31,5 +31,3 @@
 
 [mergetool]
 	path = nvim
-[commit]
-	gpgsign = false
