@@ -32,6 +32,7 @@ casks = set([
     'discord',
     'docker',
     'dropbox',
+    'font-hack',
     'google-backup-and-sync',
     'google-chrome',
     'gpg-suite',
