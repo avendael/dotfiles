@@ -53,7 +53,6 @@ casks = set([
     'vlc',
 ])
 pips = set([
-    'powerline-status',
     'tmuxp',
 ])
 # Disk usage goes up to 40GB from a fresh install just from the apps themselves
@@ -68,7 +67,7 @@ else:
 
 installed_brews = set(check_output(['brew', 'list']).strip().split('\n'))
 installed_casks = set(check_output(['brew', 'cask', 'list']).strip().split('\n'))
-installed_pips = set(check_output(['pip', 'freeze']).strip().split('\n'))
+installed_pips = set([pip.split('==')[0] for pip in check_output(['pip', 'freeze']).strip().split('\n')])
 brews_to_install = brews - installed_brews
 casks_to_install = casks - installed_casks
 pips_to_install = pips - installed_pips

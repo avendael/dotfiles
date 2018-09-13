@@ -6,6 +6,12 @@
 
 - shell:
     - mkdir -p ~/.zsh
+    -
+        command: python brew.py
+        description: Install base apps
+        stdin: true
+        stdout: true
+        stderr: true
 
 - link:
     ~/.config/:
