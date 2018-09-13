@@ -20,6 +20,10 @@ brews = set([
     'zplug',
     'zsh',
 ])
+taps = set([
+    'homebrew/cask-drivers',
+    'homebrew/cask-fonts',
+])
 casks = set([
     'alfred',
     'anki',
@@ -66,11 +70,18 @@ else:
     print('Homebrew found. Ready to brew!')
 
 installed_brews = set(check_output(['brew', 'list']).strip().split('\n'))
+installed_taps = set(check_output(['brew', 'tap']).strip().split('\n'))
 installed_casks = set(check_output(['brew', 'cask', 'list']).strip().split('\n'))
 installed_pips = set([pip.split('==')[0] for pip in check_output(['pip', 'freeze']).strip().split('\n')])
 brews_to_install = brews - installed_brews
+taps_to_install = taps - installed_taps
 casks_to_install = casks - installed_casks
 pips_to_install = pips - installed_pips
+
+if taps_to_install:
+    print('Taps to install: {}'.format(', '.join(taps_to_install)))
+else:
+    print('No taps to install')
 
 if brews_to_install:
     print('Brews to install: {}'.format(', '.join(brews_to_install)))
@@ -86,6 +97,9 @@ if pips_to_install:
     print('Pips to install: {}'.format(', '.join(pips_to_install)))
 else:
     print('No pips to install')
+
+for tap in taps_to_install:
+    call(['brew', 'tap', tap])
 
 for brew in brews_to_install:
     call(['brew', 'install', brew])
