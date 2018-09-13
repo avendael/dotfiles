@@ -2,17 +2,16 @@
 from __future__ import print_function
 
 import os
-from collections import OrderedSet
 from subprocess import call, check_output
 
-brews = OrderedSet([
+brews = set([
     'chkrootkit',
     'clamav',
     'fasd',
     'fzf',
     'git',
     'go',
-    'nvim',
+    'neovim',
     'reattach-to-user-namespace',
     'rkhunter',
     'the_silver_searcher',
@@ -21,7 +20,7 @@ brews = OrderedSet([
     'zplug',
     'zsh',
 ])
-casks = OrderedSet([
+casks = set([
     'alfred',
     'anki',
     'authy',
@@ -53,6 +52,10 @@ casks = OrderedSet([
     'visual-studio-code',
     'vlc',
 ])
+pips = set([
+    'powerline-status',
+    'tmuxp',
+])
 # Disk usage goes up to 40GB from a fresh install just from the apps themselves
 devnull = open(os.devnull, 'w')
 has_brew = call('brew help', shell=True, stdout=devnull) == 0
@@ -65,8 +68,10 @@ else:
 
 installed_brews = set(check_output(['brew', 'list']).strip().split('\n'))
 installed_casks = set(check_output(['brew', 'cask', 'list']).strip().split('\n'))
+installed_pips = set(check_output(['pip', 'freeze']).strip().split('\n'))
 brews_to_install = brews - installed_brews
 casks_to_install = casks - installed_casks
+pips_to_install = pips - installed_pips
 
 if brews_to_install:
     print('Brews to install: {}'.format(', '.join(brews_to_install)))
@@ -78,10 +83,18 @@ if casks_to_install:
 else:
     print('No casks to install')
 
+if pips_to_install:
+    print('Pips to install: {}'.format(', '.join(pips_to_install)))
+else:
+    print('No pips to install')
+
 for brew in brews_to_install:
     call(['brew', 'install', brew])
 
 for cask in casks_to_install:
     call(['brew', 'cask', 'install', cask])
+
+for pip in pips_to_install:
+    call(['pip', 'install', '--user', pip])
 
 devnull.close()
