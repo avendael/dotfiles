@@ -4,10 +4,18 @@
 
 - clean: ['~', '~/.config']
 
+- shell:
+    - mkdir -p ~/.zsh
+
 - link:
     ~/.config/:
         create: true
         glob: true
         path: config/*
+    ~/.tmux/:
+        create: true
+        glob: true
+        path: tmux/*
+    ~/.tmux.conf: tmux/init.conf
     ~/.zshenv: zsh/zshenv
     ~/.zshrc: zsh/zshrc
