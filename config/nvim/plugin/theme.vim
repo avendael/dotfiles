@@ -9,7 +9,7 @@ let g:airline_detect_paste=1
 let g:airline_skip_empty_sections=1
 let g:two_firewatch_italics=1
 let ayucolor="light"
-set background=dark
+set background=light
 set cursorline
 
 " Available colorschemes
@@ -18,7 +18,7 @@ set cursorline
 "  gruvbox
 "  solarized
 "  two-firewatch
-colorscheme gruvbox
+colorscheme ayu
 
 " No ugly vertical splits
 set fillchars+=vert:\ 
