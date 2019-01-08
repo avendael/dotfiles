@@ -47,10 +47,14 @@ export NVM_LAZY_LOAD=true
 export NVM_NO_USE=true
 export NVM_AUTO_USE=true
 
+# gpg
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
 # aliases
 alias vim="nvim"
 alias vimdiff=nvim -d
 alias g=git
+alias gpg-restart="gpgconf --kill gpg-agent && gpgconf --launch gpg-agent"
 
 # man
 man() {
@@ -73,3 +77,7 @@ export HOMEBREW_PREFIX="/usr/local"
 export MINICONDA_HOME="${HOMEBREW_PREFIX}/miniconda3"
 export PYTHON_HOME="${HOME}/Library/Python/2.7"
 export PATH="${HOME}/.local/bin:/usr/local/sbin:$PATH:${MINICONDA_HOME}/bin:${PYTHON_HOME}/bin"
+
+if [ -f ~/.config/secrets.sh ]; then
+    source ~/.config/secrets.sh
+fi
