@@ -13,6 +13,27 @@
         stdout: true
         stderr: true
 
+- shell:
+    -
+        command: python defaults.py
+        description: Set system defaults
+        stdout: true
+        stderr: true
+
+- shell:
+    -
+        command: echo '-J-XX:+CMSClassUnloadingEnabled' >> /usr/local/etc/sbtopts
+        description: Enable SBT class unloading
+        stdout: true
+        stderr: true
+
+- shell:
+    -
+        command: echo '-J-Xmx2G' >> /usr/local/etc/sbtopts
+        description: Increase SBT JVM memory to 2G
+        stdout: true
+        stderr: true
+
 - link:
     ~/.config/:
         create: true
