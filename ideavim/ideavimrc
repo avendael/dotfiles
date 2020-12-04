@@ -1,0 +1,64 @@
+set relativenumber
+set number
+set autoindent
+set ignorecase
+set smartcase
+set incsearch
+
+" *plugins* "
+set surround
+
+" *vimkeys* "
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+
+let mapleader = " "
+
+nmap <leader>fs :w<CR>
+nnoremap <leader>- :source ~/.ideavimrc<CR>
+
+" *panes* "
+nnoremap <leader>wh <C-w>h
+nnoremap <leader>wj <C-w>j
+nnoremap <leader>wk <C-w>k
+nnoremap <leader>wl <C-w>l
+nnoremap <leader>wx <C-w>x
+nnoremap <leader>wd <C-w>c
+nnoremap <leader>wo <C-w>o
+nnoremap <leader>wv <C-w>v
+nnoremap <leader>ws <C-w>s
+
+" *ide actions* "
+nnoremap [[ :action MethodUp<CR>
+nnoremap ]] :action MethodDown<CR>
+nnoremap ]c :action Diff.NextChange<CR>
+nnoremap [c :action Diff.NextChange<CR>
+nnoremap <C-j> :action EditorSplitLine<CR>
+nnoremap J :action EditorJoinLines<CR>
+nnoremap <leader>' :action ActivateTerminalToolWindow<CR>
+nnoremap <leader>pl :action ManageRecentProjects<CR>
+nnoremap <leader>mdb :action ToggleLineBreakpoint<CR>
+nnoremap <leader>pf :action GotoFile<CR>
+nnoremap <leader>fo :action GotoClass<CR>
+nnoremap <leader>ji :action FileStructurePopup<CR>
+nnoremap <leader><Tab> :action VimFilePrevious<CR>
+nnoremap <leader>ff :action ShowNavBar<CR>
+nnoremap <leader>bb :action RecentFiles<CR>
+nnoremap <leader>? :action QuickJavaDoc<CR>
+
+nnoremap <leader>gs :action Vcs.QuickListPopupAction<CR>
+nnoremap <leader>gb :action Annotate<CR>
+nnoremap <leader>gc :action ChangesView.Commit<CR>
+
+nnoremap <leader>mrf :action ExtractFunction<CR>
+nnoremap <leader>mrF :action ExtractFunctionToScope<CR>
+nnoremap <leader>mrm :action ExtractMethod<CR>
+nnoremap <leader>mrM :action ExtractModule<CR>
+nnoremap <leader>mrc :action ExtractClass<CR>
+nnoremap <leader>mrC :action ExtractSuperclass<CR>
+nnoremap <leader>mrv :action IntroduceVariable<CR>
+nnoremap <leader>mrn :action RenameElement<CR>
+
+nnoremap <leader>; :action CommentByLineComment<CR>
