@@ -6,18 +6,15 @@ from subprocess import call, check_output
 
 brews = set([
     'chkrootkit',
-    'clamav',
     'ctags',
     'fasd',
     'fzf',
     'git',
-    'go',
     'jq',
     'neovim',
+    'pyenv',
     'reattach-to-user-namespace',
     'rkhunter',
-    'sbt',
-    'scala',
     'telnet',
     'the_silver_searcher',
     'tmux',
@@ -28,6 +25,7 @@ brews = set([
 taps = set([
     'homebrew/cask-drivers',
     'homebrew/cask-fonts',
+    'beeftornado/rmtree',
 ])
 casks = set([
     'alfred',
@@ -39,26 +37,20 @@ casks = set([
     'docker',
     'dropbox',
     'font-hack',
-    'google-backup-and-sync',
+    'firefox',
     'google-chrome',
     'gpg-suite',
     'imageoptim',
     'iterm2',
     'java',
-    'jetbrains-toolbox',
     'keepingyouawake',
     'keybase',
-    'kindle',
     'licecap',
     'little-snitch',
     'logitech-options',
-    'mactex',
-    'miniconda',
-    'notion',
-    'nox-app-player',
-    'playonmac',
     'slack',
     'skype',
+    'spotify',
     'steam',
     'telegram',
     'transmission',
@@ -67,7 +59,7 @@ casks = set([
     'vlc',
 ])
 pips = set([
-    'tmuxp',
+    # 'tmuxp',
 ])
 # Disk usage goes up to 40GB from a fresh install just from the apps themselves
 devnull = open(os.devnull, 'w')
@@ -75,14 +67,23 @@ has_brew = call('brew help', shell=True, stdout=devnull) == 0
 
 if not has_brew:
     print('Installing homebrew...')
-    os.system('/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"')
+    os.system(
+        '/usr/bin/ruby -e '
+        '"$(curl -fsSL '
+        'https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+    )
 else:
     print('Homebrew found. Ready to brew!')
 
 installed_brews = set(check_output(['brew', 'list']).strip().split('\n'))
 installed_taps = set(check_output(['brew', 'tap']).strip().split('\n'))
-installed_casks = set(check_output(['brew', 'cask', 'list']).strip().split('\n'))
-installed_pips = set([pip.split('==')[0] for pip in check_output(['pip', 'freeze']).strip().split('\n')])
+installed_casks = set(
+    check_output(['brew', 'cask', 'list']).strip().split('\n')
+)
+installed_pips = set([
+    pip.split('==')[0]
+    for pip in check_output(['pip', 'freeze']).strip().split('\n')
+])
 brews_to_install = brews - installed_brews
 taps_to_install = taps - installed_taps
 casks_to_install = casks - installed_casks
