@@ -76,8 +76,18 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 export HOMEBREW_PREFIX="/usr/local"
 export MINICONDA_HOME="${HOMEBREW_PREFIX}/miniconda3"
 export PYTHON_HOME="${HOME}/Library/Python/2.7"
-export PATH="${HOME}/.local/bin:/usr/local/sbin:$PATH:${MINICONDA_HOME}/bin:${PYTHON_HOME}/bin"
+export GOPATH=$(go env GOPATH)
+export PATH="${HOME}/.local/bin:/usr/local/sbin:$PATH:${MINICONDA_HOME}/bin:${PYTHON_HOME}/bin:${GOPATH}/bin:${HOME}/.cargo/bin"
+
+# pyenv
+eval "$(pyenv init -)"
 
 if [ -f ~/.config/secrets.sh ]; then
     source ~/.config/secrets.sh
 fi
+
+if [ -f ~/.cargo/env ]; then
+    source $HOME/.cargo/env
+fi
+
+export PATH_TO_FX=/Library/Java/Extensions/javafx-sdk-11.0.2/lib
