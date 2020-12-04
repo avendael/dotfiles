@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf.vim'
     Plug 'lepture/vim-jinja'
     Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-sensible'
     Plug 'tpope/vim-sleuth'
@@ -22,4 +23,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'jbmorgado/vim-pine-script'
     Plug 'aklt/plantuml-syntax'
     Plug 'scrooloose/vim-slumlord'
+    Plug 'vim-scripts/summerfruit256.vim'
+    Plug 'vim-scripts/autumnleaf_modified.vim'
+    Plug 'cespare/vim-toml'
 call plug#end()
