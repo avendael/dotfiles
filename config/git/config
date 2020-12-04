@@ -1,16 +1,12 @@
 [color]
 	ui = auto
-
 [core]
 	excludesfile = ~/.config/git/ignore
 	autocrlf = input
-
 [push]
 	default = simple
-
 [credential]
 	helper = osxkeychain
-
 [alias]
 	br = branch
 	ci = commit -S
@@ -23,14 +19,15 @@
 	rb = rebase
 	rs = reset
 	st = status
-
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
-
 [mergetool]
 	path = nvim
 [user]
-	name = Evan Dale
+	name = Evan Aromin
 	email = evan@avendael.com
+	signingkey = 0x2DDBA43B09CCF4B7
+[commit]
+	gpgsign = true
