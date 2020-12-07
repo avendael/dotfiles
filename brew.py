@@ -75,14 +75,14 @@ if not has_brew:
 else:
     print('Homebrew found. Ready to brew!')
 
-installed_brews = set(check_output(['brew', 'list']).strip().split('\n'))
-installed_taps = set(check_output(['brew', 'tap']).strip().split('\n'))
+installed_brews = set(check_output(['brew', 'list', '--formula']).strip().split(b'\n'))
+installed_taps = set(check_output(['brew', 'tap']).strip().split(b'\n'))
 installed_casks = set(
-    check_output(['brew', 'cask', 'list']).strip().split('\n')
+    check_output(['brew', 'list', '--cask']).strip().split(b'\n')
 )
 installed_pips = set([
-    pip.split('==')[0]
-    for pip in check_output(['pip', 'freeze']).strip().split('\n')
+    pip.split(b'==')[0]
+    for pip in check_output(['pip', 'freeze']).strip().split(b'\n')
 ])
 brews_to_install = brews - installed_brews
 taps_to_install = taps - installed_taps
