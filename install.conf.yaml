@@ -7,7 +7,7 @@
 - shell:
     - mkdir -p ~/.zsh
     -
-        command: python brew.py
+        command: python3 package_installer.py
         description: Install base apps
         stdin: true
         stdout: true
@@ -32,4 +32,3 @@
     ~/.tmux.conf: tmux/init.conf
     ~/.zshenv: zsh/zshenv
     ~/.zshrc: zsh/zshrc
-    ~/.ideavimrc: ideavim/ideavimrc
