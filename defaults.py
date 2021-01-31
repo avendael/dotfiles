@@ -13,6 +13,9 @@ defaults = {
 
 
 def write_defaults(defaults):
+    if os.uname()[0] != 'Darwin':
+        return
+
     for key, value in defaults.items():
         name = value['name']
         opts = value['opts']
