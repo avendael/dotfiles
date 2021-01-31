@@ -47,9 +47,6 @@ export NVM_LAZY_LOAD=true
 export NVM_NO_USE=true
 export NVM_AUTO_USE=true
 
-# gpg
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-
 # aliases
 alias vim="nvim"
 alias vimdiff=nvim -d
@@ -69,16 +66,6 @@ man() {
             man "$@"
 }
 
-# iterm2
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# path
-export HOMEBREW_PREFIX="/usr/local"
-export MINICONDA_HOME="${HOMEBREW_PREFIX}/miniconda3"
-export PYTHON_HOME="${HOME}/Library/Python/2.7"
-export GOPATH=$(go env GOPATH)
-export PATH="${HOME}/.local/bin:/usr/local/sbin:$PATH:${MINICONDA_HOME}/bin:${PYTHON_HOME}/bin:${GOPATH}/bin:${HOME}/.cargo/bin"
-
 # pyenv
 eval "$(pyenv init -)"
 
@@ -90,4 +77,21 @@ if [ -f ~/.cargo/env ]; then
     source $HOME/.cargo/env
 fi
 
-export PATH_TO_FX=/Library/Java/Extensions/javafx-sdk-11.0.2/lib
+
+# MacOS
+if [ "$(uname)" == 'Darwin' ]; then
+    # Iterm2
+    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+    # Java
+    export PATH_TO_FX=/Library/Java/Extensions/javafx-sdk-11.0.2/lib
+
+    # GPG
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
+    # Path
+    export HOMEBREW_PREFIX="/usr/local"
+    export MINICONDA_HOME="${HOMEBREW_PREFIX}/miniconda3"
+    export PYTHON_HOME="${HOME}/Library/Python/2.7"
+    export PATH="${HOME}/.local/bin:/usr/local/sbin:$PATH:${MINICONDA_HOME}/bin:${PYTHON_HOME}/bin:${HOME}/.cargo/bin"
+fi
