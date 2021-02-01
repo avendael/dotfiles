@@ -6,12 +6,15 @@
 
 - shell:
     - mkdir -p ~/.zsh
-    -
-        command: python3 package_installer.py
-        description: Install base apps
-        stdin: true
-        stdout: true
-        stderr: true
+
+- sudo:
+    - shell:
+        -
+            command: python3 package_installer.py
+            description: Install base apps
+            stdin: true
+            stdout: true
+            stderr: true
 
 - shell:
     -
