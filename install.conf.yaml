@@ -15,16 +15,21 @@
 
 - shell:
     -
-        command: python defaults.py
+        command: test "$(uname)" = "Darwin" && python defaults.py
         description: Set system defaults
         stdout: true
         stderr: true
 
 - link:
-    ~/.config/:
+    ~/.config/git:
         create: true
-        glob: true
-        path: config/*
+        path: config/git
+    ~/.config/nvim:
+        create: true
+        path: config/nvim
+    ~/.config/powerline:
+        create: true
+        path: config/powerline
     ~/.tmux/:
         create: true
         glob: true

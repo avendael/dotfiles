@@ -4,9 +4,9 @@ sysname = os.uname()[0]
 is_known_system = True
 
 if sysname == 'Linux':
-    import platforms.ubuntu
+    from platforms.ubuntu import install_dependencies, install_packages
 elif sysname == 'Darwin':
-    import platformns.macos
+    from platformns.macos import install_dependencies, install_packages
 else:
     print('Unknown system. No packages will be installed')
     is_known_system = False
