@@ -10,8 +10,12 @@ setopt HIST_IGNORE_SPACE
 eval "$(fasd --init auto)"
 
 # Load plugins
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
+if [ "$(uname)" = 'Darwin' ]; then
+    export ZPLUG_HOME=/usr/local/opt/zplug
+    source $ZPLUG_HOME/init.zsh
+else
+    source /usr/share/zplug/init.zsh
+fi
 
 MNML_USER_CHAR='₿'
 
@@ -67,7 +71,9 @@ man() {
 }
 
 # pyenv
-eval "$(pyenv init -)"
+if type pyenv &> /dev/null; then
+    eval "$(pyenv init -)"
+fi
 
 if [ -f ~/.config/secrets.sh ]; then
     source ~/.config/secrets.sh
@@ -79,7 +85,7 @@ fi
 
 
 # MacOS
-if [ "$(uname)" == 'Darwin' ]; then
+if [ "$(uname)" = 'Darwin' ]; then
     # Iterm2
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
