@@ -7,15 +7,6 @@
 - shell:
     - mkdir -p ~/.zsh
 
-- sudo:
-    - shell:
-        -
-            command: python3 package_installer.py
-            description: Install base apps
-            stdin: true
-            stdout: true
-            stderr: true
-
 - link:
     ~/.config/git:
         create: true

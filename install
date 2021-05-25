@@ -13,14 +13,16 @@ cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}${SUFFIX}" -p dotbot-sudo/sudo.py "${@}"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}${SUFFIX}" "${@}"
 
 case "$(uname)" in
   Darwin)
-    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "darwin${SUFFIX}" "${@}"
+    echo "Configuring MacOS"
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "darwin${SUFFIX}" -p dotbot-sudo/sudo.py "${@}"
     ;;
   Linux)
-    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "linux${SUFFIX}" "${@}"
+    echo "Configuring Linux"
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "linux${SUFFIX}" -p dotbot-sudo/sudo.py -p dotbot_plugin_aptget/aptget.py "${@}"
     ;;
   *)
     echo "Unknown OS: $(uname). Skipping OS specific directives."

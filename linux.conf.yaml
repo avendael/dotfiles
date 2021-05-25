@@ -1,2 +1,16 @@
-- shell:
-    - echo "Nothing to do"
+- sudo:
+    - aptget:
+        - chkrootkit
+        - exuberant-ctags
+        - fasd
+        - fzf
+        - git
+        - jq
+        - neovim
+        - rkhunter
+        - telnet
+        - silversearcher-ag
+        - tmux
+        - unrar
+        - zplug
+        - zsh
