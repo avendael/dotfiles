@@ -101,3 +101,7 @@ if [ "$(uname)" = 'Darwin' ]; then
     export PYTHON_HOME="${HOME}/Library/Python/2.7"
     export PATH="${HOME}/.local/bin:/usr/local/sbin:$PATH:${MINICONDA_HOME}/bin:${PYTHON_HOME}/bin:${HOME}/.cargo/bin"
 fi
+
+# WSL2
+winhome=$(cmd.exe /c "<nul set /p=%UserProfile%" 2>/dev/null || true)
+export WSL_WIN_HOME="$(wslpath -u "$winhome")"
