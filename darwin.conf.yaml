@@ -1,0 +1,6 @@
+- shell:
+    -
+        command: python defaults.py
+        description: Set system defaults
+        stdout: true
+        stderr: true

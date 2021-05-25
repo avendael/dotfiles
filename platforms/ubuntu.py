@@ -10,7 +10,6 @@ packages = set([
     b'git',
     b'jq',
     b'neovim',
-    b'pyenv',
     b'rkhunter',
     b'telnet',
     b'silversearcher-ag',

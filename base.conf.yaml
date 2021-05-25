@@ -16,13 +16,6 @@
             stdout: true
             stderr: true
 
-- shell:
-    -
-        command: test "$(uname)" = "Darwin" && python defaults.py
-        description: Set system defaults
-        stdout: true
-        stderr: true
-
 - link:
     ~/.config/git:
         create: true
@@ -40,3 +33,6 @@
     ~/.tmux.conf: tmux/init.conf
     ~/.zshenv: zsh/zshenv
     ~/.zshrc: zsh/zshrc
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]

@@ -2,7 +2,8 @@
 
 set -e
 
-CONFIG="install.conf.yaml"
+CONFIG="base"
+SUFFIX=".conf.yaml"
 DOTBOT_DIR="dotbot"
 
 DOTBOT_BIN="bin/dotbot"
@@ -12,4 +13,16 @@ cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" -p dotbot-sudo/sudo.py "${@}"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}${SUFFIX}" -p dotbot-sudo/sudo.py "${@}"
+
+case "$(uname)" in
+  Darwin)
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "darwin${SUFFIX}" "${@}"
+    ;;
+  Linux)
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "linux${SUFFIX}" "${@}"
+    ;;
+  *)
+    echo "Unknown OS: $(uname). Skipping OS specific directives."
+    ;;
+esac
