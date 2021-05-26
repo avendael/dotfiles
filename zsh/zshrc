@@ -84,8 +84,8 @@ if [ -f ~/.cargo/env ]; then
 fi
 
 
-# MacOS
 if [ "$(uname)" = 'Darwin' ]; then
+    # MacOS
     # Iterm2
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -100,8 +100,8 @@ if [ "$(uname)" = 'Darwin' ]; then
     export MINICONDA_HOME="${HOMEBREW_PREFIX}/miniconda3"
     export PYTHON_HOME="${HOME}/Library/Python/2.7"
     export PATH="${HOME}/.local/bin:/usr/local/sbin:$PATH:${MINICONDA_HOME}/bin:${PYTHON_HOME}/bin:${HOME}/.cargo/bin"
+else
+    # WSL2
+    winhome=$(cmd.exe /c "<nul set /p=%UserProfile%" 2>/dev/null || true)
+    export WSL_WIN_HOME="$(wslpath -u "$winhome")"
 fi
-
-# WSL2
-winhome=$(cmd.exe /c "<nul set /p=%UserProfile%" 2>/dev/null || true)
-export WSL_WIN_HOME="$(wslpath -u "$winhome")"
