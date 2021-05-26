@@ -1,10 +1,55 @@
-- shell:
-    -
-        command: python3 package_installer.py
-        description: Install base apps
-        stdin: true
-        stdout: true
-        stderr: true
+- tap:
+    - homebrew/cask-drivers
+    - homebrew/cask-fonts
+    - beeftornado/rmtree
+
+- brew:
+    - chkrootkit
+    - ctags
+    - fasd
+    - fzf
+    - git
+    - jq
+    - neovim
+    - pyenv
+    - reattach-to-user-namespace
+    - rkhunter
+    - telnet
+    - the_silver_searcher
+    - tmux
+    - unrar
+    - zplug
+    - zsh
+
+- cask:
+    - alfred
+    - anki
+    - authy
+    - bartender
+    - bisq
+    - discord
+    - docker
+    - dropbox
+    - font-hack
+    - firefox
+    - google-chrome
+    - gpg-suite
+    - imageoptim
+    - iterm2
+    - keepingyouawake
+    - keybase
+    - licecap
+    - little-snitch
+    - logitech-options
+    - slack
+    - skype
+    - spotify
+    - steam
+    - telegram
+    - transmission
+    - viscosity
+    - visual-studio-code
+    - vlc
 
 - shell:
     -

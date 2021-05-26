@@ -18,7 +18,7 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 case "$(uname)" in
   Darwin)
     echo "Configuring MacOS"
-    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "darwin${SUFFIX}" "${@}"
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "darwin${SUFFIX}" -p dotbot-brew/brew.py "${@}"
     ;;
   Linux)
     echo "Configuring Linux"
