@@ -1,0 +1,12 @@
+- shell:
+    -
+        command: \[ ! -d ~/.pyenv \] && curl https://pyenv.run | bash || echo "Pyenv already installed"
+        stderr: true
+        stdout: true
+    - grep pyenv ~/.profile &> /dev/null || cat pyenv.profile >> ~/.profile
+    - grep pyenv ~/.zprofile &> /dev/null || cat pyenv.profile >> ~/.zprofile
+
+- pipx:
+    file: requirements-pipx.txt
+    stdout: true
+    stderr: true

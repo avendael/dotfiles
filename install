@@ -13,6 +13,7 @@ cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
+echo "Running base configuration"
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}${SUFFIX}" "${@}"
 
 case "$(uname)" in
@@ -28,3 +29,6 @@ case "$(uname)" in
     echo "Unknown OS: $(uname). Skipping OS specific directives."
     ;;
 esac
+
+echo "Configuring development environments"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "dev${SUFFIX}" -p dotbot-pip/pip.py "${@}"

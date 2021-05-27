@@ -19,6 +19,8 @@
         - libxmlsec1-dev
         - llvm
         - make
+        - pipx
+        - python3-venv
         - neovim
         - rkhunter
         - silversearcher-ag
