@@ -4,31 +4,32 @@ set -e
 
 CONFIG="base"
 SUFFIX=".conf.yaml"
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTBOT_DIR="dotbot"
-
+PLUGIN_DIR="plugins/**"
 DOTBOT_BIN="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-cd "${BASEDIR}"
+cd "${BASE_DIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
 echo "Running base configuration"
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}${SUFFIX}" "${@}"
+"${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "${CONFIG}${SUFFIX}" "${@}"
 
 case "$(uname)" in
   Darwin)
     echo "Configuring MacOS"
-    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "darwin${SUFFIX}" -p dotbot-brew/brew.py "${@}"
+    "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" --plugin-dir "${PLUGIN_DIR}" -d "${BASE_DIR}" -c "darwin${SUFFIX}" "${@}"
+    echo "Configuring development environments"
+    "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" --plugin-dir "${PLUGIN_DIR}" -d "${BASE_DIR}" -c "dev${SUFFIX}" "${@}"
     ;;
   Linux)
     echo "Configuring Linux"
-    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "linux${SUFFIX}" -p dotbot-sudo/sudo.py -p dotbot_plugin_aptget/aptget.py "${@}"
+    "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "linux${SUFFIX}" --plugin-dir "${PLUGIN_DIR}" "${@}"
+    echo "Configuring development environments"
+    "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "dev${SUFFIX}" --plugin-dir "${PLUGIN_DIR}" "${@}"
     ;;
   *)
     echo "Unknown OS: $(uname). Skipping OS specific directives."
     ;;
 esac
-
-echo "Configuring development environments"
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "dev${SUFFIX}" -p dotbot-pip/pip.py "${@}"
