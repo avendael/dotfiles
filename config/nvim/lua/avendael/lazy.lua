@@ -64,20 +64,24 @@ local plugins = {
                 -- And you can configure cmp even more, if you want to.
                 local cmp = require('cmp')
                 local cmp_action = lsp_zero.cmp_action()
-                local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
                 cmp.setup({
                     formatting = lsp_zero.cmp_format(),
+                    window = {
+                        completion = cmp.config.window.bordered(),
+                        documentation = cmp.config.window.bordered(),
+                    },
                     mapping = cmp.mapping.preset.insert({
-                        ['<C-.>'] = cmp.mapping.complete(),
+                        ["<C-'>"] = cmp.mapping.complete(),
                         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
                         ['<C-d>'] = cmp.mapping.scroll_docs(4),
-                        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-                        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
                         ['<C-y>'] = cmp.mapping.confirm({ select = true }),
                         ['<C-f>'] = cmp_action.luasnip_jump_forward(),
                         ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-                    })
+                    }),
+                    sources = {
+                        {name = 'nvim_lsp'},
+                    },
                 })
             end
         },
@@ -119,13 +123,19 @@ local plugins = {
                 require('mason-lspconfig').setup({
                     ensure_installed = {
                         'lua_ls',
+                        'pylsp',
                     },
                     handlers = {
                         lsp_zero.default_setup,
                         lua_ls = function()
-                            -- (Optional) Configure lua language server for neovim
                             local lua_opts = lsp_zero.nvim_lua_ls()
-                            require('lspconfig').lua_ls.setup(lua_opts)
+
+                            require('lspconfig').lua_ls.setup(
+                                lsp_zero.nvim_lua_ls(lua_opts)
+                            )
+                        end,
+                        pylsp = function()
+                            require('lspconfig').pylsp.setup {}
                         end,
                     },
                     automatic_installation = true,
