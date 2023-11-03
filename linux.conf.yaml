@@ -1,35 +1,25 @@
 - sudo:
     - aptget:
+        - 7zip
         - build-essential
-        - chkrootkit
         - curl
-        - exuberant-ctags
         - fasd
         - fzf
         - git
+        - gpg
+        - gpg-agent
+        - gnupg
         - jq
-        - libbz2-dev
-        - libffi-dev
-        - liblzma-dev
-        - libncursesw5-dev
-        - libreadline-dev
-        - libsqlite3-dev
-        - libssl-dev
-        - libxml2-dev
-        - libxmlsec1-dev
         - llvm
-        - make
         - pipx
-        - python3-venv
-        - neovim
-        - rkhunter
-        - silversearcher-ag
+        - ripgrep
+        - scdaemon
+        - socat
         - telnet
-        - tk-dev
         - tmux
         - unrar
-        - wget
-        - xz-utils
-        - zlib1g-dev
         - zplug
         - zsh
+    - snap:
+        - nvim:
+            classic: true

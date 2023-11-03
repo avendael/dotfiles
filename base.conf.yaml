@@ -14,9 +14,6 @@
     ~/.config/nvim:
         create: true
         path: config/nvim
-    ~/.config/powerline:
-        create: true
-        path: config/powerline
     ~/.tmux/:
         create: true
         glob: true
