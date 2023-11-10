@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # History
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_SAVE_NO_DUPS
@@ -6,7 +13,6 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_IGNORE_SPACE
 
 # fasd
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(fasd --init auto)"
 
 # Load plugins
@@ -20,7 +26,7 @@ fi
 MNML_USER_CHAR='₿'
 
 zplug "mafredri/zsh-async", from:github
-zplug "subnixr/minimal", use:minimal.zsh, from:github, as:theme
+zplug "romkatv/powerlevel10k", from:github, as:theme, depth:1
 zplug "unixorn/warhol.plugin.zsh"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-history-substring-search"
@@ -35,15 +41,12 @@ fi
 zplug load
 
 # keybindings
-bindkey -M emacs '^P' history-substring-search-up
-bindkey -M emacs '^N' history-substring-search-down
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey -e
 
 # fzf
 export FZF_TMUX=1
 export FZF_DEFAULT_OPTS='--reverse --inline-info --ansi --color=light'
-export FZF_DEFAULT_COMMAND='ag -g "" --hidden'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # nvm
@@ -105,3 +108,8 @@ else
     winhome=$(cmd.exe /c "<nul set /p=%UserProfile%" 2>/dev/null || true)
     export WSL_WIN_HOME="$(wslpath -u "$winhome")"
 fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

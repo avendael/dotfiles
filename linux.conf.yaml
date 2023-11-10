@@ -4,7 +4,6 @@
         - build-essential
         - curl
         - fasd
-        - fzf
         - git
         - gpg
         - gpg-agent
@@ -23,3 +22,15 @@
     - snap:
         - nvim:
             classic: true
+- shell:
+    -
+        command: git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        description: Clone the latest fzf
+        stdout: true
+        stderr: true
+    -
+        command: ~/.fzf/install
+        description: Install fzf from git since apt fzf tends to be old
+        stdin: true
+        stdout: true
+        stderr: true

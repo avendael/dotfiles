@@ -14,6 +14,9 @@
     ~/.config/nvim:
         create: true
         path: config/nvim
+    ~/.config/zsh:
+        create: true
+        path: config/zsh
     ~/.tmux/:
         create: true
         glob: true
@@ -21,6 +24,7 @@
     ~/.tmux.conf: tmux/init.conf
     ~/.zshenv: zsh/zshenv
     ~/.zshrc: zsh/zshrc
+    ~/.zprofile: zsh/zprofile
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
