@@ -4,3 +4,4 @@ config/nvim/autoload/
 config/nvim/.netrwhist
 __pycache__
 .vscode
+lazy-lock.json

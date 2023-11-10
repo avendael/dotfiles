@@ -28,6 +28,11 @@ local plugins = {
         dependencies = { 'rktjmp/lush.nvim' },
     },
     {
+        'ellisonleao/gruvbox.nvim',
+        priority = 1000,
+        config = true
+    },
+    {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate'
     },
