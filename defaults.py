@@ -22,8 +22,11 @@ def write_defaults(defaults):
         opts = value['opts']
         args = value['args']
         print(
-            'Writing default {} {}: options "{}", args "{}'.format(key, name, opts, args)
+            'Writing default {} {}: options "{}", args "{}'.format(
+                key, name, opts, args
+            )
         )
         call(['defaults', 'write', key, name] + opts + args)
+
 
 write_defaults(defaults)
