@@ -95,9 +95,6 @@ if [ "$(uname)" = 'Darwin' ]; then
     # Java
     export PATH_TO_FX=/Library/Java/Extensions/javafx-sdk-11.0.2/lib
 
-    # GPG
-    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-
     # Path
     export HOMEBREW_PREFIX="/usr/local"
     export MINICONDA_HOME="${HOMEBREW_PREFIX}/miniconda3"
@@ -108,6 +105,13 @@ else
     winhome=$(cmd.exe /c "<nul set /p=%UserProfile%" 2>/dev/null || true)
     export WSL_WIN_HOME="$(wslpath -u "$winhome")"
 fi
+
+# GPG
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+export GPG_AGENT_SOCK=$(gpgconf --list-dirs agent-socket)
+
+export EDITOR=nvim
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
